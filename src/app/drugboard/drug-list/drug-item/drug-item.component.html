@@ -1,13 +1,16 @@
 <div class="list-group-item list-group-item-action" (click)="onSelected()">
     <div class="row">
-        <div class="col-sm-3">Perscriber: {{ drug.perscriber }}</div>
-        <div class="col-sm-3">PerscriptionID: {{ drug.prescriptionID }}</div>
-        <div class="col-sm-3">Related to: {{ drug.relatesToID }}</div>
-        <div class="col-sm-3" [ngClass]="{
-            'bg-success': drug.status === 'Approved',
-            'bg-info': drug.status === 'Pending',
-            'bg-danger': drug.status === 'Declined',
-            'bg-warning': drug.status === 'Failed' || drug.status === 'Error'
-        }">STATUS: {{ drug.status }}</div>
+        <div class="col-sm-3">ID: {{ drug._id }}</div>
+        <div class="col-sm-2">Type: {{ drug.MessageType }}</div>
+        <div class="col-sm-2">DR: {{ drug.Prescriber.NonVeterinarian.Name.FirstName }} {{ drug.Prescriber.NonVeterinarian.Name.LastName }}</div>
+        <div class="col-sm-3">DrugCode: {{ drug.MedicationPrescribed.DrugCoded.ProductCode.Code }}</div>
+        <!-- <div class="col-sm-2">Relates#: {{ drug.RelatesToMessageID }}</div> -->
+        <div class="col-sm-2" [ngClass]="{
+            'bg-success': drugStatusEnum[drug.RequestStatus] === 'Approved',
+            'bg-info': drugStatusEnum[drug.RequestStatus] == 'Pending',
+            'bg-danger': drugStatusEnum[drug.RequestStatus] === 'Declined',
+            'bg-danger': drugStatusEnum[drug.RequestStatus] === 'Canceled',
+            'bg-warning': drugStatusEnum[drug.RequestStatus] === 'Failed' || drugStatusEnum[drug.status] === 'Error'
+        }">STATUS: {{ drugStatusEnum[drug.RequestStatus] }}</div>
     </div>
 </div>

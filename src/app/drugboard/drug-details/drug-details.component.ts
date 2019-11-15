@@ -8,12 +8,6 @@ import { Drug } from '../drug.model';
 })
 export class DrugDetailsComponent implements OnInit, OnChanges {
   @Input() selectedDrug: Drug;
-  // code: string = JSON.stringify({
-  //   perscriber: 'sender',
-  //   ID: 'Code 404 in description',
-  //   relatedToID: ['eRx', 'sender'],
-  //   Status: 'eRx ERROR'
-  //   }, null, 4);
   code: string = '';
   constructor() { }
 
@@ -22,12 +16,6 @@ export class DrugDetailsComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     console.log(this.selectedDrug);
-    this.code = `    {
-      "perscriber": "${this.selectedDrug.perscriber}",
-      "ID": "${this.selectedDrug.prescriptionID}",
-      "relatedToID": "${this.selectedDrug.relatesToID}",
-      "Status": "${this.selectedDrug.status}"
-    }`;
+    this.code = JSON.stringify(this.selectedDrug, null, 2);
   }
-
 }

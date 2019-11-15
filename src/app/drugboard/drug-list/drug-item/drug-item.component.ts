@@ -10,9 +10,19 @@ import { Drug } from '../../drug.model';
 export class DrugItemComponent implements OnInit {
   @Input() drug: Drug;
   @Output() drugSelected = new EventEmitter<Drug>();
-  constructor(private drugsService: DrugsService) { }
+  drugStatusEnum: string[];
+  constructor(private drugsService: DrugsService) {
+    this.drugStatusEnum = [
+      'Pending',
+      'Approved',
+      'Denied',
+      'Canceled',
+      'Errored' // maybe add a filled enum?
+    ];
+  }
 
   ngOnInit() {
+    this.drug.MessageType
   }
 
   onSelected() {

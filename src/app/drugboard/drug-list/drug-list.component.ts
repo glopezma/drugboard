@@ -13,6 +13,9 @@ export class DrugListComponent implements OnInit {
 
   constructor(private drugsService: DrugsService) {
     this.allDrugs = this.drugsService.drugs;
+    this.drugsService.drugsChangedEvent.subscribe(res => {
+      this.allDrugs = res;
+    });
   }
 
   ngOnInit() {

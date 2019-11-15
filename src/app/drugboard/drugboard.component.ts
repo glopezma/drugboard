@@ -14,14 +14,12 @@ export class DrugboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.selectedDrug) {
-      this.selectedDrug = this.drugsService.drugs[0];
-      console.log(this.selectedDrug);
+    if (!this.drugsService.drugs) {
+      this.drugsService.getDrugs();
     }
   }
 
   drugSelected(drug: Drug) {
     this.selectedDrug = drug;
   }
-
 }
