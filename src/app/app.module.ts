@@ -2,10 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { DrugboardComponent } from './drugboard/drugboard.component';
+import { DrugListComponent } from './drugboard/drug-list/drug-list.component';
+import { DrugItemComponent } from './drugboard/drug-list/drug-item/drug-item.component';
+import { DrugDetailsComponent } from './drugboard/drug-details/drug-details.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DrugboardComponent,
+    DrugListComponent,
+    DrugItemComponent,
+    DrugDetailsComponent
   ],
   imports: [
     BrowserModule

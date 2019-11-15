@@ -1,0 +1,13 @@
+<div class="list-group-item list-group-item-action" (click)="onSelected()">
+    <div class="row">
+        <div class="col-sm-3">Perscriber: {{ drug.perscriber }}</div>
+        <div class="col-sm-3">PerscriptionID: {{ drug.prescriptionID }}</div>
+        <div class="col-sm-3">Related to: {{ drug.relatesToID }}</div>
+        <div class="col-sm-3" [ngClass]="{
+            'bg-success': drug.status === 'Approved',
+            'bg-info': drug.status === 'Pending',
+            'bg-danger': drug.status === 'Declined',
+            'bg-warning': drug.status === 'Failed' || drug.status === 'Error'
+        }">STATUS: {{ drug.status }}</div>
+    </div>
+</div>
