@@ -12,7 +12,7 @@ export class DrugListComponent implements OnInit {
   @Output() drugWasSelected = new EventEmitter<Drug>();
 
   constructor(private drugsService: DrugsService) {
-    this.allDrugs = this.drugsService.Drugs;
+    this.allDrugs = this.drugsService.drugs;
   }
 
   ngOnInit() {

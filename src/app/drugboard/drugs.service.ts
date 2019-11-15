@@ -1,11 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Drug } from './drug.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DrugsService {
-  Drugs: Drug[] = [
+  drugs: Drug[] = [
     new Drug('1111', 'Joe', '2222', 'Approved'),
     new Drug('4444', 'Joe', '5555', 'Pending'),
     new Drug('2222', 'Joe', '3333', 'Pending'),
@@ -17,5 +18,12 @@ export class DrugsService {
   ];
   DrugsChangedEvent = new EventEmitter<Drug[]>();
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getDrugs() {
+    let url = ``;
+    // this.http.get<DrugDTO[]>(``).subscribe(res => {
+
+    // });
+  }
 }

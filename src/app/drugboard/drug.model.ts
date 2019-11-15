@@ -6,3 +6,7 @@ export class Drug {
         public status: string
     ) { }
 }
+
+export class DrugBoardDTO {
+
+}

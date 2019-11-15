@@ -10,11 +10,13 @@ import { Drug } from './drug.model';
 })
 export class DrugboardComponent implements OnInit {
   selectedDrug: Drug;
-  constructor(private drugsService: DrugsService) { }
+  constructor(private drugsService: DrugsService) {
+  }
 
   ngOnInit() {
     if (!this.selectedDrug) {
-      this.selectedDrug = this.drugsService[0];
+      this.selectedDrug = this.drugsService.drugs[0];
+      console.log(this.selectedDrug);
     }
   }
 
