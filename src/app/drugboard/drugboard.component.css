@@ -1,0 +1,12 @@
+img {
+    width: 40px;
+}
+
+a {
+    vertical-align: super;
+    margin-left: 20px;
+}
+
+h3 {
+    display: inline-block;
+}

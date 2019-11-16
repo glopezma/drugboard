@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-sm-3">ID: {{ drug._id }}</div>
         <div class="col-sm-2">Type: {{ drug.MessageType }}</div>
-        <div class="col-sm-2">DR: {{ drug.Prescriber.NonVeterinarian.Name.FirstName }} {{ drug.Prescriber.NonVeterinarian.Name.LastName }}</div>
+        <div class="col-sm-2">DR: {{ drug.Prescriber.NonVeterinarian.Name.FirstName }}
+            {{ drug.Prescriber.NonVeterinarian.Name.LastName }}</div>
         <div class="col-sm-3">DrugCode: {{ drug.MedicationPrescribed.DrugCoded.ProductCode.Code }}</div>
         <!-- <div class="col-sm-2">Relates#: {{ drug.RelatesToMessageID }}</div> -->
         <div class="col-sm-2" [ngClass]="{
@@ -11,6 +12,11 @@
             'bg-danger': drugStatusEnum[drug.RequestStatus] === 'Declined',
             'bg-danger': drugStatusEnum[drug.RequestStatus] === 'Canceled',
             'bg-warning': drugStatusEnum[drug.RequestStatus] === 'Failed' || drugStatusEnum[drug.status] === 'Error'
-        }">STATUS: {{ drugStatusEnum[drug.RequestStatus] }}</div>
+        }">
+            STATUS: {{ drugStatusEnum[drug.RequestStatus] }}
+            <a *ngIf="drugStatusEnum[drug.RequestStatus] !== 'Approved' && drugStatusEnum[drug.RequestStatus] !== 'Declined'" href="">
+                <img src="../../assets/ios_11_New2_Ununion-25-512.png" alt="refresh icon">
+            </a>
+        </div>
     </div>
 </div>
