@@ -7,6 +7,7 @@ import { DrugboardComponent } from './drugboard/drugboard.component';
 import { DrugListComponent } from './drugboard/drug-list/drug-list.component';
 import { DrugItemComponent } from './drugboard/drug-list/drug-item/drug-item.component';
 import { DrugDetailsComponent } from './drugboard/drug-details/drug-details.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { DrugDetailsComponent } from './drugboard/drug-details/drug-details.comp
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
