@@ -1,7 +1,9 @@
-img {
-    width: 25px;
+i {
+    vertical-align: middle;
+    color: white;
 }
 
-a {
-    margin-left: 10px;
+.bg-info {
+    padding: 0 !important;
+    text-align: center !important;
 }

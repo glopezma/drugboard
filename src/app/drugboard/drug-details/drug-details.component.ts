@@ -8,14 +8,13 @@ import { Drug } from '../drug.model';
 })
 export class DrugDetailsComponent implements OnInit, OnChanges {
   @Input() selectedDrug: Drug;
-  code: string = '';
+  code = '';
   constructor() { }
 
   ngOnInit() {
   }
 
   ngOnChanges() {
-    console.log(this.selectedDrug);
     this.code = JSON.stringify(this.selectedDrug, null, 2);
   }
 }

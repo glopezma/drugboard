@@ -11,6 +11,11 @@ import { Drug } from './drug.model';
 export class DrugboardComponent implements OnInit {
   selectedDrug: Drug;
   constructor(private drugsService: DrugsService) {
+    this.drugsService.drugsChangedEvent.subscribe(res => {
+      if (!this.selectedDrug) {
+        this.selectedDrug = this.drugsService.drugs[0];
+      }
+    });
   }
 
   ngOnInit() {
