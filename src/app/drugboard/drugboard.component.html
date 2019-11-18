@@ -1,6 +1,6 @@
 <app-header (clicked)="collapsed = !collapsed"></app-header>
 <div class="row">
-    <div [ngClass]="{'col-sm-12': collapsed}" class="col-sm-8 left-content">
+    <div [ngClass]="{'col-sm-12': collapsed, 'left-content col-sm-8': !collapsed}">
         <app-drug-list (drugWasSelected)="drugSelected($event)"></app-drug-list>
     </div>
     <div class="col-sm-4 right-content">
