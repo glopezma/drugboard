@@ -8,6 +8,7 @@
             <th scope="col">Drug Code</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
+            <th scope="col">Responses</th>
         </tr>
     </thead>
     <tbody>
@@ -21,10 +22,16 @@
                 {{ drugStatusEnum[drug.RequestStatus] }}
             </td>
             <td>
-                <a href="" (click)="sendConfirmation(drug)"><i title="Send Confirmation Response" class="material-icons btn-outline-success">check_circle</i></a>
-                <a href=""><i title="Send Cancelation Request" class="material-icons btn-outline-danger">cancel</i></a>
-                <a href=""><i title="Send Retry" class="material-icons btn-outline-warning">report_problem</i></a>
-                <a href=""><i title="Send Refill" class="material-icons btn-outline-success">redo</i></a>
+                <a href="#" (click)="sendConfirmation(drug)"><i title="Send Confirmation Response" class="material-icons btn-outline-success">check_circle</i></a>
+                <a href="#"><i title="Send Cancelation Request" class="material-icons btn-outline-danger">cancel</i></a>
+                <a href="#"><i title="Send Retry" class="material-icons btn-outline-warning">report_problem</i></a>
+                <a href="#"><i title="Send Refill" class="material-icons btn-outline-success">redo</i></a>
+            </td>
+            <td>
+                <a href="#"><i title="Send Confirmation Response" class="material-icons btn-outline-success">check_circle</i></a>
+                <a href="#"><i title="Send Cancelation Request" class="material-icons btn-outline-danger">cancel</i></a>
+                <a href="#"><i title="Send Retry" class="material-icons btn-outline-warning">report_problem</i></a>
+                <a href="#"><i title="Send Refill" class="material-icons btn-outline-success">redo</i></a>
             </td>
         </tr>
     </tbody>

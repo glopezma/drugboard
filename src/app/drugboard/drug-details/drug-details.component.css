@@ -5,6 +5,7 @@
 pre {
   overflow-y: inherit;
   max-height: 1000px;
+  background-color: #222222 !important;
 }
 
 ::-webkit-scrollbar {
