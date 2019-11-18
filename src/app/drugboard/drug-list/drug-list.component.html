@@ -1,4 +1,31 @@
-<ul class="list-group">
-    <app-drug-item *ngFor="let drug of allDrugs" [drug]="drug"
-        (drugSelected)="onDrugSelected(drug)"></app-drug-item>
-</ul>
+<table class="table table-hover table-dark text-center table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID</th>
+            <th scope="col">Type</th>
+            <th scope="col">Prescriber</th>
+            <th scope="col">Drug Code</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let drug of allDrugs" (click)="onSelected(drug)">
+            <td>{{ allDrugs.indexOf(drug) }}</td>
+            <td>{{ drug._id }}</td>
+            <td>{{ drug.MessageType }}</td>
+            <td>{{ drug.Prescriber.NonVeterinarian.Name.FirstName }}</td>
+            <td>{{ drug.MedicationPrescribed.DrugCoded.ProductCode.Code }}</td>
+            <td appDrugStatusHighlight [highlightOn]=drugStatusEnum[drug.RequestStatus]>
+                {{ drugStatusEnum[drug.RequestStatus] }}
+            </td>
+            <td>
+                <a href="" (click)="sendConfirmation(drug)"><i title="Send Confirmation Response" class="material-icons btn-outline-success">check_circle</i></a>
+                <a href=""><i title="Send Cancelation Request" class="material-icons btn-outline-danger">cancel</i></a>
+                <a href=""><i title="Send Retry" class="material-icons btn-outline-warning">report_problem</i></a>
+                <a href=""><i title="Send Refill" class="material-icons btn-outline-success">redo</i></a>
+            </td>
+        </tr>
+    </tbody>
+</table>

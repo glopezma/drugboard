@@ -1,26 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { DrugsService } from './drugs.service';
-import { Drug } from './drug.model';
+import { ERxService } from '../shared/controllers/erx.service';
+import { Drug } from '../shared/models/drug.model';
 
 @Component({
   selector: 'app-drugboard',
   templateUrl: './drugboard.component.html',
   styleUrls: ['./drugboard.component.css'],
-  providers: [DrugsService]
+  providers: [ERxService]
 })
 export class DrugboardComponent implements OnInit {
   selectedDrug: Drug;
-  constructor(private drugsService: DrugsService) {
-    this.drugsService.drugsChangedEvent.subscribe(res => {
+  collapsed = true;
+
+
+  constructor(private erxService: ERxService) {
+    this.erxService.drugsChangedEvent.subscribe(res => {
       if (!this.selectedDrug) {
-        this.selectedDrug = this.drugsService.drugs[0];
+        this.selectedDrug = this.erxService.drugs[0];
       }
     });
   }
 
   ngOnInit() {
-    if (!this.drugsService.drugs) {
-      this.drugsService.getDrugs();
+    if (!this.erxService.drugs) {
+      this.erxService.getDrugs();
     }
   }
 

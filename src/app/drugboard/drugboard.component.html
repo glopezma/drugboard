@@ -1,15 +1,9 @@
+<app-header (clicked)="collapsed = !collapsed"></app-header>
 <div class="row">
-    <div class="col-sm-8">
-        <h3>DrugBoard</h3>
-        <a href=""><i class="material-icons animated rubberBand infinite slow delay-5s">refresh</i></a>
-    </div>
-    <div class="col-sm-4"></div>
-</div>
-<div class="row">
-    <div class="col-sm-8">
+    <div [ngClass]="{'col-sm-12': collapsed}" class="col-sm-8 left-content">
         <app-drug-list (drugWasSelected)="drugSelected($event)"></app-drug-list>
     </div>
-    <div class="col-sm-4">
-        <app-drug-details [selectedDrug]="selectedDrug"></app-drug-details>
+    <div class="col-sm-4 right-content">
+        <app-drug-details *ngIf="!collapsed" [selectedDrug]="selectedDrug"></app-drug-details>
     </div>
 </div>

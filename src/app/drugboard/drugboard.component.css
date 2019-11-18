@@ -15,3 +15,13 @@ i {
 h3 {
     display: inline-block;
 }
+
+.left-content {
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.right-content {
+    margin-left: 0;
+    padding-left: 0;
+}

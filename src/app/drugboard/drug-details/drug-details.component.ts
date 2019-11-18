@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Drug } from '../drug.model';
+import { Drug } from '../../shared/models/drug.model';
 
 @Component({
   selector: 'app-drug-details',

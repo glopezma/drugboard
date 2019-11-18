@@ -1,27 +1,32 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { DrugsService } from '../drugs.service';
-import { Drug } from '../drug.model';
+import { ERxService } from '../../shared/controllers/erx.service';
+import { Drug } from '../../shared/models/drug.model';
+import { DrugStatusEnumService } from './drug-status-enum.service';
 
 @Component({
   selector: 'app-drug-list',
   templateUrl: './drug-list.component.html',
-  styleUrls: ['./drug-list.component.css']
+  styleUrls: ['./drug-list.component.css'],
+  providers: [DrugStatusEnumService]
 })
 export class DrugListComponent implements OnInit {
   allDrugs: Drug[];
+  drugStatusEnum: string[];
   @Output() drugWasSelected = new EventEmitter<Drug>();
 
-  constructor(private drugsService: DrugsService) {
+  constructor(private drugsService: ERxService, public drugEnum: DrugStatusEnumService) {
     this.allDrugs = this.drugsService.drugs;
     this.drugsService.drugsChangedEvent.subscribe(res => {
       this.allDrugs = res;
     });
+    this.drugStatusEnum = drugEnum.drugStatusEnum;
   }
 
   ngOnInit() {
   }
 
-  onDrugSelected(drug: Drug) {
+  onSelected(drug: any) {
+    console.log(drug);
     this.drugWasSelected.emit(drug);
   }
 
