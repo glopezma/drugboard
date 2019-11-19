@@ -12,7 +12,6 @@ export class DrugboardComponent implements OnInit {
   selectedDrug: Drug;
   collapsed = true;
 
-
   constructor(private erxService: ERxService) {
     this.erxService.drugsChangedEvent.subscribe(res => {
       if (!this.selectedDrug) {

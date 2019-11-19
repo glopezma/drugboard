@@ -30,9 +30,23 @@ export class DrugListComponent implements OnInit {
     this.drugWasSelected.emit(drug);
   }
 
-  sendConfirmation(drug: Drug) {
-    let x = this.erxService.isAvailable();
-    console.log(x);
+  check() {
+    this.erxService.isAvailable().subscribe(res => {
+      console.log(res);
+    });
   }
 
+  renewalResponse(drug: Drug, approved: boolean) {
+    console.log('renewal response');
+    this.erxService.rxRenewalResponse(drug, approved).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  changeResponse(drug: Drug, approved: boolean) {
+    console.log('change response');
+    this.erxService.rxChangeResponse(drug, approved).subscribe(res => {
+      console.log(res);
+    });
+  }
 }

@@ -16,5 +16,4 @@ export class HeaderComponent implements OnInit {
   showInfo() {
     this.clicked.emit('clicked');
   }
-
 }

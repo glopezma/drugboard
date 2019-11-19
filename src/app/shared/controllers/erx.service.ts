@@ -3,20 +3,25 @@ import { Drug } from '../models/drug.model';
 import { HttpClient } from '@angular/common/http';
 import { DrugStatusEnumService } from './drug-status-enum.service';
 import { Observable } from 'rxjs';
+import { ContextBuilderService } from './context-builder.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ERxService {
+  private host: string;
+  private url: string;
+  private testUrl: string;
+  private enum: string[] = new DrugStatusEnumService().drugStatusEnum;
+  private contextBuilder: ContextBuilderService;
   drugs: Drug[];
-  host: string;
-  url: string;
-  enum: string[] = new DrugStatusEnumService().drugStatusEnum;
   drugsChangedEvent = new EventEmitter<Drug[]>();
 
   constructor(private http: HttpClient) {
     this.host = 'bolt-erx-dev.medonesystems.com';
-    this.url = `https://${this.host}/api//v1/relay`;
+    // this.host = 'localhost:44379';
+    this.url = `https://${this.host}/api/v1/relay`;
+    // this.testUrl = `https://${this.host}/api/v1/relay/EchoScript`;
   }
 
   getDrugs() {
@@ -33,13 +38,16 @@ export class ERxService {
   }
 
   rxRenewalResponse(drug: Drug, approved: boolean): Observable<any> {
-    console.log('refill approved');
-    return this.http.post<any>(`${this.url}/RxRenewalResponse`, drug);
+    // console.log('refill approved');
+    this.contextBuilder = new ContextBuilderService(drug, approved);
+    console.log(this.contextBuilder.getRxRenewalResponse());
+    return this.http.post<any>(`${this.url}/RxRenewalResponse`, this.contextBuilder.getRxRenewalResponse());
   }
 
-  rxChangeResponse(drug: Drug): Observable<any> {
-    console.log('approved change');
-    return this.http.post<any>(`${this.url}/RxChangeResponse`, drug);
+  rxChangeResponse(drug: Drug, approved: boolean): Observable<any> {
+    this.contextBuilder = new ContextBuilderService(drug, approved);
+    console.log(this.contextBuilder.getRxChangeResponse());
+    return this.http.post<any>(`${this.url}/RxChangeResponse`, this.contextBuilder.getRxChangeResponse());
   }
 
   cancelRxRequest(drug: Drug): Observable<any> {
@@ -47,9 +55,3 @@ export class ERxService {
     return this.http.post<any>(`${this.url}/CancelRxRequest`, drug);
   }
 }
-
-/*
-refill: yes/no
-cancelRX: (just send ID more or less)
-ChangeResponse: yes/no
-*/
