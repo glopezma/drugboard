@@ -21,7 +21,7 @@ export class ERxService {
     this.host = 'bolt-erx-dev.medonesystems.com';
     // this.host = 'localhost:44379';
     this.url = `https://${this.host}/api/v1/relay`;
-    // this.testUrl = `https://${this.host}/api/v1/relay/EchoScript`;
+    this.testUrl = `https://${this.host}/api/v1/relay/EchoScript`;
   }
 
   getDrugs() {
@@ -50,8 +50,9 @@ export class ERxService {
     return this.http.post<any>(`${this.url}/RxChangeResponse`, this.contextBuilder.getRxChangeResponse());
   }
 
-  cancelRxRequest(drug: Drug): Observable<any> {
-    console.log('canceled rx');
-    return this.http.post<any>(`${this.url}/CancelRxRequest`, drug);
+  rxCancelRequest(drug: Drug): Observable<any> {
+    this.contextBuilder = new ContextBuilderService(drug);
+    console.log(this.contextBuilder.getRxCancelRequest());
+    return this.http.post<any>(`${this.url}/CancelRxRequest`, this.contextBuilder.getRxCancelRequest());
   }
 }

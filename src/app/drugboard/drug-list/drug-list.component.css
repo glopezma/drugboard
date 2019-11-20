@@ -1,3 +1,12 @@
 td {
     cursor: pointer;
+    vertical-align: middle;
+}
+
+.btn {
+    margin: 1px  10px !important;
+}
+
+i {
+    vertical-align: middle;
 }

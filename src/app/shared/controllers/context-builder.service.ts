@@ -13,7 +13,7 @@ export class ContextBuilderService {
   pharmacyContext: any;
   prescriptionContext: any;
 
-  constructor(public drug: Drug, public approved: boolean) {
+  constructor(public drug: Drug, public approved?: boolean) {
     this.responseContext = this.createApproveResponse();
     this.prescriberContext = this.createPrescriberContext();
     this.patientContext = this.createPatientContext();
@@ -138,22 +138,39 @@ export class ContextBuilderService {
   }
 
   createPharmacyContext() {
-    return {
-      NCPDPID: this.drug.Pharmacy.Identification.NCPDPID,
-      NPINumber: this.drug.Pharmacy.Identification.NPI,
-      StoreAddressCity: this.drug.Pharmacy.Address.City,
-      StoreAddressLine1: this.drug.Pharmacy.Address.AddressLine1,
-      StoreNumber: '5', // this will need to change in the future
-      StoreAddressLine2: this.drug.Pharmacy.Address.AddressLine2,
-      StoreAddressState: this.drug.Pharmacy.Address.StateProvince,
-      StoreAddressZipCode: this.drug.Pharmacy.Address.PostalCode,
-      OrganizationName: this.drug.Pharmacy.BusinessName,
-      StorePhoneNumber: this.drug.Pharmacy.CommunicationNumbers.PrimaryTelephone.Number
-    };
+    if (this.drug.MessageType === 'RxRenewal') {
+      return {
+        NCPDPID: this.drug.Pharmacy.Identification.NCPDPID,
+        NPINumber: this.drug.Pharmacy.Identification.NPI,
+        StoreAddressCity: this.drug.Pharmacy.Address.City,
+        StoreAddressLine1: this.drug.Pharmacy.Address.AddressLine1,
+        StoreNumber: '5', // this will need to change in the future
+        StoreAddressLine2: this.drug.Pharmacy.Address.AddressLine2,
+        StoreAddressState: this.drug.Pharmacy.Address.StateProvince,
+        StoreAddressZipCode: this.drug.Pharmacy.Address.PostalCode,
+        OrganizationName: this.drug.Pharmacy.BusinessName,
+        StorePhoneNumber: this.drug.Pharmacy.CommunicationNumbers.PrimaryTelephone.Number
+      };
+    }
+    else {
+      return {
+        NCPDPID: '9905525',
+        NPINumber: '1104922541',
+        StoreAddressCity: 'Zanesville',
+        StoreAddressLine1: '344 Maple Ave.',
+        StoreNumber: '5',
+        StoreAddressLine2: null,
+        StoreAddressState: 'OH',
+        StoreAddressZipCode: '43701',
+        OrganizationName: 'CVS',
+        StorePhoneNumber: '6141234567'
+      };
+    }
   }
 
   getRxChangeResponse() {
     return {
+      MedicationRequestCode: 'G',
       Response: this.responseContext,
       PrescriberContext: this.prescriberContext,
       PatientContext: this.patientContext,
@@ -175,6 +192,17 @@ export class ContextBuilderService {
       PrescriptionContext: this.prescriptionContext,
       RelatesToMessageID: this.drug.MessageID,
       RxReferenceNumber: this.drug.MessageID
+    };
+  }
+
+  getRxCancelRequest() {
+    return {
+      PrescriberContext: this.prescriberContext,
+      PatientContext: this.patientContext,
+      MedicationContext: this.medicationContext,
+      PharmacyContext: this.pharmacyContext,
+      PrescriptionContext: this.prescriptionContext,
+      RelatesToMessageID: this.drug.MessageID,
     };
   }
 }

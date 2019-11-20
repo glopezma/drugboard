@@ -16,13 +16,26 @@ export class DrugListComponent implements OnInit {
 
   constructor(private erxService: ERxService, public drugEnum: DrugStatusEnumService) {
     this.allDrugs = this.erxService.drugs;
+    this.drugStatusEnum = drugEnum.drugStatusEnum;
     this.erxService.drugsChangedEvent.subscribe(res => {
       this.allDrugs = res;
     });
-    this.drugStatusEnum = drugEnum.drugStatusEnum;
   }
 
   ngOnInit() {
+  }
+
+  approve(drug: Drug) {
+    const approved = true;
+    if (drug.MessageType === 'RxChange') this.changeResponse(drug, approved);
+    else if (drug.MessageType === 'RxRenewal') this.renewalResponse(drug, approved);
+  }
+
+  cancel(drug: Drug) {
+    const approved = false;
+    if (drug.MessageType === 'NewRx' || drug.MessageType === 'newRxMessage') this.cancelRequest(drug);
+    else if (drug.MessageType === 'RxChange') this.changeResponse(drug, approved);
+    else if (drug.MessageType === 'RxRenewal') this.renewalResponse(drug, approved);
   }
 
   onSelected(drug: Drug) {
@@ -37,15 +50,19 @@ export class DrugListComponent implements OnInit {
   }
 
   renewalResponse(drug: Drug, approved: boolean) {
-    console.log('renewal response');
     this.erxService.rxRenewalResponse(drug, approved).subscribe(res => {
       console.log(res);
     });
   }
 
   changeResponse(drug: Drug, approved: boolean) {
-    console.log('change response');
     this.erxService.rxChangeResponse(drug, approved).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  cancelRequest(drug: Drug) {
+    this.erxService.rxCancelRequest(drug).subscribe(res => {
       console.log(res);
     });
   }

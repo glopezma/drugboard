@@ -7,13 +7,14 @@
             <th scope="col">Prescriber</th>
             <th scope="col">Drug Code</th>
             <th scope="col">Status</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Approve</th>
+            <th scope="col">Cancel / Decline</th>
             <!-- <th scope="col">Responses</th> -->
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let drug of allDrugs" (click)="onSelected(drug)">
-            <td>{{ allDrugs.indexOf(drug) }}</td>
+        <tr *ngFor="let drug of allDrugs; let drugIndex = index" (click)="onSelected(drug)">
+            <td>{{ drugIndex }}</td>
             <td>{{ drug._id }}</td>
             <td>{{ drug.MessageType }}</td>
             <td>{{ drug.Prescriber.NonVeterinarian.Name.FirstName }}</td>
@@ -22,17 +23,23 @@
                 {{ drugStatusEnum[drug.RequestStatus] }}
             </td>
             <td>
-                <a href="#" (click)="renewalResponse(drug, true)"><i title="Send Confirmation Response" class="material-icons btn-outline-success">check_circle</i></a>
-                <a href="#" (click)="renewalResponse(drug, false)"><i title="Send Cancelation Request" class="material-icons btn-outline-danger">cancel</i></a>
-                <a href="#" (click)="check()"><i title="Send Retry" class="material-icons btn-outline-warning">report_problem</i></a>
-                <a href="#"><i title="Send Refill" class="material-icons btn-outline-success">redo</i></a>
+                <button
+                    *ngIf="drug.MessageType !== 'NewRx' && drug.MessageType !== 'newRxMessage' && drug.RequestStatus === 0"
+                    class="btn btn-outline-success"
+                    (click)="approve(drug, true)"
+                    title="Send Approval Response">
+                    <i class="material-icons">check_circle</i>
+                </button>
             </td>
-            <!-- <td>
-                <a href="#"><i title="Send Confirmation Response" class="material-icons btn-outline-success">check_circle</i></a>
-                <a href="#"><i title="Send Cancelation Request" class="material-icons btn-outline-danger">cancel</i></a>
-                <a href="#"><i title="Send Retry" class="material-icons btn-outline-warning">report_problem</i></a>
-                <a href="#"><i title="Send Refill" class="material-icons btn-outline-success">redo</i></a>
-            </td> -->
+            <td>
+                <button
+                    *ngIf="drug.RequestStatus === 0"
+                    class="btn btn-outline-danger"
+                    (click)="cancel(drug)"
+                    title="Send Cancel request or Decline Response">
+                    <i class="material-icons">cancel</i>
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>
