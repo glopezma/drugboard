@@ -1,19 +1,5 @@
-img {
-    width: 40px;
-}
-
-a {
-    vertical-align: super;
-    margin-left: 20px;
-}
-
-i {
-    vertical-align: middle;
-    color: white;
-}
-
-h3 {
-    display: inline-block;
+.navbar-dark .navbar-brand {
+    font-size: 40px !important;
 }
 
 .left-content {
@@ -24,4 +10,17 @@ h3 {
 .right-content {
     margin-left: 0;
     padding-left: 0;
+}
+
+img {
+    width: 40px;
+}
+
+i {
+    vertical-align: middle;
+    color: white;
+}
+
+h3 {
+    display: inline-block;
 }

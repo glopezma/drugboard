@@ -5,6 +5,7 @@
             <th scope="col">ID</th>
             <th scope="col">Type</th>
             <th scope="col">Prescriber</th>
+            <th scope="col">Time</th>
             <th scope="col">Drug Code</th>
             <th scope="col">Status</th>
             <th scope="col">Approve</th>
@@ -18,13 +19,17 @@
             <td>{{ drug._id }}</td>
             <td>{{ drug.MessageType }}</td>
             <td>{{ drug.Prescriber.NonVeterinarian.Name.FirstName }}</td>
+            <td>{{ drug.LastModified | date:'short' }}</td>
             <td>{{ drug.MedicationPrescribed.DrugCoded.ProductCode.Code }}</td>
             <td appDrugStatusHighlight [highlightOn]=drugStatusEnum[drug.RequestStatus]>
                 {{ drugStatusEnum[drug.RequestStatus] }}
             </td>
             <td>
                 <button
-                    *ngIf="drug.MessageType !== 'NewRx' && drug.MessageType !== 'newRxMessage' && drug.RequestStatus === 0"
+                    *ngIf="drug.MessageType !== 'NewRx' &&
+                        drug.MessageType !== 'newRxMessage' &&
+                        drug.MessageType !== 'CancelRx'
+                        && drug.RequestStatus === 0"
                     class="btn btn-outline-success"
                     (click)="approve(drug, true)"
                     title="Send Approval Response">
