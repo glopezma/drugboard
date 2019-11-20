@@ -22,13 +22,15 @@ export class ERxService {
     // this.host = 'localhost:44379';
     this.url = `https://${this.host}/api/v1/relay`;
     this.testUrl = `https://${this.host}/api/v1/relay/EchoScript`;
+    this.getDrugs();
   }
 
+
   getDrugs() {
+    console.log('drugs updated');
     const url = `${this.url}/DrugBoard`;
     this.http.get<Drug[]>(url).subscribe(res => {
       this.drugs = res.sort((a, b) => new Date(b.LastModified).getTime() - new Date(a.LastModified).getTime());
-      console.log(this.drugs);
       this.drugsChangedEvent.emit(this.drugs);
     });
   }

@@ -8,25 +8,23 @@ import { Drug } from '../shared/models/drug.model';
   styleUrls: ['./drugboard.component.css'],
   providers: [ERxService]
 })
-export class DrugboardComponent implements OnInit {
+export class DrugboardComponent {
   selectedDrug: Drug;
   collapsed = true;
 
   constructor(private erxService: ERxService) {
     this.erxService.drugsChangedEvent.subscribe(res => {
       if (!this.selectedDrug) {
-        this.selectedDrug = this.erxService.drugs[0];
+        this.selectedDrug = res[0];
       }
     });
   }
 
-  ngOnInit() {
-    if (!this.erxService.drugs) {
-      this.erxService.getDrugs();
-    }
-  }
-
   drugSelected(drug: Drug) {
     this.selectedDrug = drug;
+  }
+
+  reloadBoard() {
+    this.erxService.getDrugs();
   }
 }

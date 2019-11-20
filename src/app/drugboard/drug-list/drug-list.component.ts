@@ -17,12 +17,17 @@ export class DrugListComponent implements OnInit {
   constructor(private erxService: ERxService, public drugEnum: DrugStatusEnumService) {
     this.allDrugs = this.erxService.drugs;
     this.drugStatusEnum = drugEnum.drugStatusEnum;
-    this.erxService.drugsChangedEvent.subscribe(res => {
-      this.allDrugs = res;
-    });
   }
 
   ngOnInit() {
+    this.allDrugs = this.erxService.drugs;
+    console.log(this.allDrugs);
+    if (!this.allDrugs) {
+      this.erxService.drugsChangedEvent.subscribe(res => {
+        this.allDrugs = res;
+        console.log(this.allDrugs);
+      });
+    }
   }
 
   approve(drug: Drug) {

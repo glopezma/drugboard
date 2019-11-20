@@ -7,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   @Output() clicked = new EventEmitter<any>();
-
+  @Output() reload = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
@@ -15,5 +15,9 @@ export class HeaderComponent implements OnInit {
 
   showInfo() {
     this.clicked.emit('clicked');
+  }
+
+  reloadBoard() {
+    this.reload.emit('reload clicked');
   }
 }
